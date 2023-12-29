@@ -1,33 +1,66 @@
-name: Shopify CI/CD Pipeline
+name: Shopify
 
 on:
   push:
     branches:
       - main
+  pull_request:
+
+concurrency:
+  group: shopify-${{ github.head_ref }}
+  cancel-in-progress: true
 
 jobs:
-  build:
-    runs-on: ubuntu-latest
-
+  test:
+    name: Tests with Ruby ${{ matrix.version }} on ${{ matrix.os }}
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        version:
+          - 3.1.0
+          - 3.0.2
+          - 2.7.5
+        os:
+          - macos-11
+          - ubuntu-20.04
+          - ubuntu-22.04
     steps:
-      - name: Checkout Repository
-        uses: actions/checkout@v2
-
-      - name: Set up Node.js
-        uses: actions/setup-node@v4
+      - uses: actions/checkout@v2
+      - name: Set Git configuration
+        run: |
+          git config --global user.email "development-lifecycle@shopify.com"
+          git config --global user.name "Development Lifecycle"
+      - name: Set up Ruby ${{ matrix.version }}
+        uses: ruby/setup-ruby@v1
         with:
-          node-version: '16'
-
-      - name: Navigate to project directory
-        run: cd $HOME/Desktop/socksslides
+          ruby-version: ${{ matrix.version }}
+          bundler-cache: true
 
       - name: Install Dependencies
-        run: npm install
+        run: bundle install
 
-      - name: Set Shopify CLI Theme Token
-        run: echo "SHOPIFY_CLI_THEME_TOKEN=${{ secrets.SHOPIFY_CLI_THEME_TOKEN }}" >> $GITHUB_ENV
+      - name: Run Tests
+        run: bundle exec rake test
+  rubocop:
+    name: Rubocop
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        version:
+          - 3.1.0
+        os:
+          - macos-latest
+    steps:
+      - uses: actions/checkout@v2
 
-      - name: Run Shopify CLI Commands
-        run: npx shopify theme deploy --env=development
-        env:
-          SHOPIFY_CLI_THEME_TOKEN: ${{ env.SHOPIFY_CLI_THEME_TOKEN }}
+      - name: Set up Ruby ${{ matrix.version }}
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: ${{ matrix.version }}
+          bundler-cache: true
+
+      - name: Install Dependencies
+        run: bundle install
+
+      - name: Rubocop
+        run: bundle exec rake rubocop
