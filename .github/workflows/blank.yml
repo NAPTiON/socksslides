@@ -1,22 +1,33 @@
-name: Contributor License Agreement (CLA)
+name: Shopify CI/CD Pipeline
 
 on:
-  pull_request_target:
-    types: [opened, synchronize]
-  issue_comment:
-    types: [created]
+  push:
+    branches:
+      - main
 
 jobs:
-  cla:
+  build:
     runs-on: ubuntu-latest
-    if: |
-      (github.event.issue.pull_request 
-        && !github.event.issue.pull_request.merged_at
-        && contains(github.event.comment.body, 'signed')
-      ) 
-      || (github.event.pull_request && !github.event.pull_request.merged)
+
     steps:
-      - uses: Shopify/shopify-cla-action@v1
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4  # Use v4 instead of v3
         with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
-          cla-token: ${{ secrets.CLA_TOKEN }}
+          node-version: '16'  # Set Node.js version to 16
+
+      - name: Install Dependencies
+        run: npm install
+
+      - name: Install Shopify CLI
+        run: npm install -g @shopify/cli
+
+      - name: Set Shopify CLI Theme Token
+        run: echo "SHOPIFY_CLI_THEME_TOKEN=${{ secrets.SHOPIFY_CLI_THEME_TOKEN }}" >> $GITHUB_ENV
+
+      - name: Run Shopify CLI Commands
+        run: npx shopify theme deploy --env=development --directory=path/to/your/shopify/theme
+        env:
+          SHOPIFY_CLI_THEME_TOKEN: ${{ env.SHOPIFY_CLI_THEME_TOKEN }}
