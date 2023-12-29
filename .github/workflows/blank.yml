@@ -18,8 +18,9 @@ jobs:
         with:
           node-version: '16'
 
-      - name: Navigate to project directory
-        run: cd First1
+   - name: Navigate to project directory
+  run: cd /Users/robertdowell/Documents/copy-of-copy-of-ride
+
 
       - name: Install Dependencies
         run: npm install
