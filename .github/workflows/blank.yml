@@ -1,66 +1,23 @@
-name: Shopify
+
+name: Contributor License Agreement (CLA)
 
 on:
-  push:
-    branches:
-      - main
-  pull_request:
-
-concurrency:
-  group: shopify-${{ github.head_ref }}
-  cancel-in-progress: true
+  pull_request_target:
+    types: [opened, synchronize]
+  issue_comment:
+    types: [created]
 
 jobs:
-  test:
-    name: Tests with Ruby ${{ matrix.version }} on ${{ matrix.os }}
-    runs-on: ${{ matrix.os }}
-    strategy:
-      matrix:
-        version:
-          - 3.1.0
-          - 3.0.2
-          - 2.7.5
-        os:
-          - macos-11
-          - ubuntu-20.04
-          - ubuntu-22.04
+  cla:
+    runs-on: ubuntu-latest
+    if: |
+      (github.event.issue.pull_request 
+        && !github.event.issue.pull_request.merged_at
+        && contains(github.event.comment.body, 'signed')
+      ) 
+      || (github.event.pull_request && !github.event.pull_request.merged)
     steps:
-      - uses: actions/checkout@v2
-      - name: Set Git configuration
-        run: |
-          git config --global user.email "development-lifecycle@shopify.com"
-          git config --global user.name "Development Lifecycle"
-      - name: Set up Ruby ${{ matrix.version }}
-        uses: ruby/setup-ruby@v1
+      - uses: Shopify/shopify-cla-action@v1
         with:
-          ruby-version: ${{ matrix.version }}
-          bundler-cache: true
-
-      - name: Install Dependencies
-        run: bundle install
-
-      - name: Run Tests
-        run: bundle exec rake test
-  rubocop:
-    name: Rubocop
-    runs-on: ${{ matrix.os }}
-    strategy:
-      matrix:
-        version:
-          - 3.1.0
-        os:
-          - macos-latest
-    steps:
-      - uses: actions/checkout@v2
-
-      - name: Set up Ruby ${{ matrix.version }}
-        uses: ruby/setup-ruby@v1
-        with:
-          ruby-version: ${{ matrix.version }}
-          bundler-cache: true
-
-      - name: Install Dependencies
-        run: bundle install
-
-      - name: Rubocop
-        run: bundle exec rake rubocop
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          cla-token: ${{ secrets.CLA_TOKEN }}
