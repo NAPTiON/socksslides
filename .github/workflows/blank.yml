@@ -22,7 +22,7 @@ jobs:
         run: npm install
 
       - name: Set Shopify CLI Theme Token
-        run: echo "SHOPIFY_CLI_THEME_TOKEN=${{ Miles }}" >> $GITHUB_ENV
+        run: echo "SHOPIFY_CLI_THEME_TOKEN=${{ secrets.SHOPIFY_CLI_THEME_TOKEN }}" >> $GITHUB_ENV
 
       - name: Run Shopify CLI Commands
         run: npx shopify theme deploy --env=development --directory=path/to/your/shopify/theme
