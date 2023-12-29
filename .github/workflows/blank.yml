@@ -19,7 +19,7 @@ jobs:
           node-version: '16'
 
       - name: Navigate to project directory
-        run: cd /Users/robertdowell/Documents/copy-of-copy-of-ride
+        run: cd First1
 
       - name: Install Dependencies
         run: npm install
@@ -28,6 +28,6 @@ jobs:
         run: echo "SHOPIFY_CLI_THEME_TOKEN=${{ secrets.SHOPIFY_CLI_THEME_TOKEN }}" >> $GITHUB_ENV
 
       - name: Run Shopify CLI Commands
-        run: npx shopify theme deploy --env=development --directory=/Users/robertdowell/Documents/copy-of-copy-of-ride
+        run: npx shopify theme deploy --env=development --directory=cd copy-of-copy-of-ride
         env:
           SHOPIFY_CLI_THEME_TOKEN: ${{ env.SHOPIFY_CLI_THEME_TOKEN }}
