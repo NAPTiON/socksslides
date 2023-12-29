@@ -18,13 +18,16 @@ jobs:
         with:
           node-version: '16'
 
-      - name: List contents of the current directory
-        run: ls
+      - name: Navigate to project directory
+        run: cd /Users/robertdowell/Documents/copy-of-copy-of-ride
+
+      - name: Install Dependencies
+        run: npm install
 
       - name: Set Shopify CLI Theme Token
         run: echo "SHOPIFY_CLI_THEME_TOKEN=${{ secrets.SHOPIFY_CLI_THEME_TOKEN }}" >> $GITHUB_ENV
 
       - name: Run Shopify CLI Commands
-        run: npx shopify theme deploy --env=development --directory=path/to/your/shopify/theme
+        run: npx shopify theme deploy --env=development --directory=/Users/robertdowell/Documents/copy-of-copy-of-ride
         env:
           SHOPIFY_CLI_THEME_TOKEN: ${{ env.SHOPIFY_CLI_THEME_TOKEN }}
