@@ -1,0 +1,14 @@
+﻿<Properties StartupConfiguration="{036BB1D6-8F01-41CA-B6E4-D26C3EFB4796}|Default">
+  <MonoDevelop.Ide.Workbench ActiveDocument="EmptyCSSFile.css">
+    <Files>
+      <File FileName="EmptyCSSFile.css" Line="464" Column="1" />
+    </Files>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.ItemProperties.Soap PreferredExecutionTarget="MonoDevelop.Default" />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MultiItemStartupConfigurations />
+</Properties>

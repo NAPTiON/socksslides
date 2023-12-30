@@ -1,0 +1,14 @@
+﻿<Properties StartupConfiguration="{E400B006-0DF6-4BF8-BE73-16B9892F12F5}|Default">
+  <MonoDevelop.Ide.Workbench ActiveDocument="soapn/Program.cs">
+    <Files>
+      <File FileName="soapn/Program.cs" Line="1811" Column="1" />
+    </Files>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MultiItemStartupConfigurations />
+  <MonoDevelop.Ide.ItemProperties.soapn PreferredExecutionTarget="MonoDevelop.Default" />
+</Properties>
