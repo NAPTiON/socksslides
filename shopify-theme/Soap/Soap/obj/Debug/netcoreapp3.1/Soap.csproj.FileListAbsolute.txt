@@ -1,5 +1,0 @@
-/Users/robertdowell/Projects/Soap/Soap/obj/Debug/netcoreapp3.1/Soap.csproj.AssemblyReference.cache
-/Users/robertdowell/Projects/Soap/Soap/obj/Debug/netcoreapp3.1/Soap.GeneratedMSBuildEditorConfig.editorconfig
-/Users/robertdowell/Projects/Soap/Soap/obj/Debug/netcoreapp3.1/Soap.AssemblyInfoInputs.cache
-/Users/robertdowell/Projects/Soap/Soap/obj/Debug/netcoreapp3.1/Soap.AssemblyInfo.cs
-/Users/robertdowell/Projects/Soap/Soap/obj/Debug/netcoreapp3.1/Soap.csproj.CoreCompileInputs.cache
