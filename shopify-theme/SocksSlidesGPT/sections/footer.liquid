@@ -3,7 +3,8 @@
 {%- comment -%}
   Custom Script for Shopify with Confetti Animation
 {%- endcomment -%}
-{{ 'snippets/custom-scripts.js' | asset_url | script_tag }}
+<script async src="{{ 'snippets/custom-scripts.js' | asset_url }}"></script>
+
 </body>
 </html>
 {% comment %}theme-check-disable UndefinedObject{% endcomment %}
