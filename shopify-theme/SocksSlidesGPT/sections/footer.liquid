@@ -1,3 +1,12 @@
+!-- Existing content of footer.liquid -->
+
+{%- comment -%}
+  Custom Script for Shopify with Confetti Animation
+{%- endcomment -%}
+{{ 'custom-scripts.js.liquid' | http://127.0.0.1:9292/shopify-theme/socksslidesgpt/snippets/custom-scripts.js.liquid
+  | script_tag }}
+</body>
+</html>
 {% comment %}theme-check-disable UndefinedObject{% endcomment %}
 {{ 'section-footer.css' | asset_url | stylesheet_tag }}
 {{ 'component-newsletter.css' | asset_url | stylesheet_tag }}
