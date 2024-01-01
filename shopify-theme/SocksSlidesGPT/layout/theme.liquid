@@ -359,7 +359,35 @@
     {%- if settings.predictive_search_enabled -%}
       <script src="{{ 'predictive-search.js' | asset_url }}" defer="defer"></script>
     {%- endif -%}
+    console.log('custom-scripts.js has been loaded');
 
+{% comment %}
+Your first JavaScript code
+{% endcomment %}
+<script>
+  console.log('Hello from the first script!');
+</script>
+
+{% comment %}
+Your second JavaScript code
+{% endcomment %}
+<script>
+  console.log('Hello from the second script!');
+</script>
+
+{% comment %}
+Additional JavaScript code using canvas-confetti
+{% endcomment %}
+<script>
+  window.onload = function() {
+    // Trigger the confetti animation
+    confetti({
+      particleCount: 100,
+      spread: 70,
+      origin: { y: 0.6 },
+    });
+  };
+</script>
 
   </body>
 </html>
